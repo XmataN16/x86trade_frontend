@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>x86 Trade - Каталог товаров</title>
+    <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header_inner">
+          <a href="index.html" class="logo">
+            <img src="images/logo.svg" alt="Логотип x86 Trade" />
+            <div class="name_logo">x86 Trade</div>
+          </a>
+          <nav class="menu">
+            <button class="menu_btn">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <ul class="menu_list">
+              <li class="menu_item">
+                <a href="index.html" class="menu_link">Главная</a>
+              </li>
+              <li class="menu_item">
+                <a href="delivery.html" class="menu_link">Доставка</a>
+              </li>
+              <li class="menu_item">
+                <a href="about.html" class="menu_link">О нас</a>
+              </li>
+              <li class="menu_item">
+                <a href="vacancy.html" class="menu_link">Вакансии</a>
+              </li>
+              <li class="menu_item">
+                <a href="contact.html" class="menu_link">Контакты</a>
+              </li>
+            </ul>
+          </nav>
+          <ul class="user-actions">
+            <li class="user-actions_item">
+              <a href="cart.html" class="user-actions_link cart-container">
+                <img src="images/cart.svg" alt="Корзина" class="cart-icon" />
+                <span class="tooltip">Корзина</span>
+              </a>
+            </li>
+
+            <li class="user-actions_item">
+              <a href="#" class="user-actions_link profile-container">
+                <img src="images/user.svg" alt="Профиль" class="profile-icon" />
+                <span class="tooltip">Профиль</span>
+              </a>
+            </li>
+
+            <li class="user-actions_item user-actions_item-search">
+              <a href="#" class="user-actions_link search-container">
+                <img src="images/search.svg" alt="Поиск" class="search-icon" />
+                <span class="tooltip">Поиск</span>
+              </a>
+            </li>
+          </ul>
+          <!-- Блок с текущим временем -->
+          <div class="time-display" id="current-time"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="catalog_header">
+        <div class="container">
+          <h2 class="section_title">Каталог товаров</h2>
+          <p class="catalog_subtitle">
+            Выберите нужный компонент для вашего ПК.
+          </p>
+        </div>
+      </section>
+
+      <section class="catalog_filters">
+        <div class="container">
+          <div
+            class="active_filters"
+            id="activeFiltersContainer"
+            style="display: none"
+          >
+            <span id="activeCategoryFilter"></span>
+            <span id="activePriceFilter"></span>
+            <span id="activeBrandFilter"></span>
+            <button id="clearAllFiltersBtn" class="clear_filters_btn">
+              Сбросить все фильтры
+            </button>
+          </div>
+
+          <div class="filter_controls">
+            <div class="filter_group">
+              <label for="categoryFilter">Категория:</label>
+              <select id="categoryFilter">
+                <option value="">Все категории</option>
+                <option value="Процессоры">Процессоры</option>
+                <option value="Материнские платы">Материнские платы</option>
+                <option value="Оперативная память">Оперативная память</option>
+                <option value="Видеокарты">Видеокарты</option>
+                <option value="Твердотельные накопители (SSD)">
+                  Твердотельные накопители (SSD)
+                </option>
+              </select>
+            </div>
+
+            <div class="filter_group">
+              <label for="brandFilter">Производитель:</label>
+              <select id="brandFilter">
+                <option value="">Все производители</option>
+                <option value="Intel">Intel</option>
+                <option value="AMD">AMD</option>
+                <option value="ASUS">ASUS</option>
+                <option value="Corsair">Corsair</option>
+                <option value="NVIDIA">NVIDIA</option>
+                <option value="Kingston">Kingston</option>
+              </select>
+            </div>
+
+            <div class="filter_group">
+              <label for="priceMin">Цена от (₽):</label>
+              <input type="number" id="priceMin" min="0" placeholder="0" />
+              <label for="priceMax">до (₽):</label>
+              <input type="number" id="priceMax" min="0" placeholder="∞" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="catalog_products">
+        <div class="container">
+          <div class="products_grid" id="productsGrid">
+            <!-- Товары будут добавлены через JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer_distributed">
+      <div class="footer_left">
+        <div class="logo_footer">
+          <a href="index.html" class="logo">
+            <img src="images/logo.svg" alt="Логотип x86 Trade" />
+            <div class="name_logo">x86 Trade</div>
+          </a>
+        </div>
+        <p class="footer_links">
+          <a href="index.html" class="link_1">Главная</a>
+          <a href="delivery.html">Доставка</a>
+          <a href="vacancy.html">Вакансии</a>
+          <a href="about.html">О нас</a>
+          <a href="contact.html">Контакты</a>
+        </p>
+        <p class="footer_company_name">x86 Trade © 2025</p>
+      </div>
+      <div class="footer_center">
+        <div>
+          <img src="images/location.svg" alt="Адрес" class="footer_icon" />
+          <p><span>ул. Попова 42</span> Белгород, Россия</p>
+        </div>
+        <div>
+          <img src="images/phone.svg" alt="Телефон" class="footer_icon" />
+          <p>+7 999 999 999</p>
+        </div>
+        <div>
+          <img src="images/email.svg" alt="Почта" class="footer_icon" />
+          <p><a href="mailto:x86trade@gmail.com">x86trade@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer_right">
+        <p class="footer_company_about">
+          <span>О компании</span>
+          Наша компания имеет многолетний опыт сборки и тестирования
+          конфигурация, обращайтесь!.
+        </p>
+        <div class="footer_icons">
+          <a href="#" class="social_icon_link">
+            <img
+              src="images/social_network/vk.svg"
+              alt="Мы ВКонтакте"
+              class="social_icon_img"
+            />
+          </a>
+          <a href="#" class="social_icon_link">
+            <img
+              src="images/social_network/telegram.svg"
+              alt="Наш Telegram"
+              class="social_icon_img"
+            />
+          </a>
+          <a href="#" class="social_icon_link">
+            <img
+              src="images/social_network/facebook.svg"
+              alt="Наш Email"
+              class="social_icon_img"
+            />
+          </a>
+          <a href="#" class="social_icon_link">
+            <img
+              src="images/social_network/instagram.svg"
+              alt="Наш Instagram"
+              class="social_icon_img"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+
+    <script src="js/api.js"></script>
+    <script src="js/catalog.js"></script>
+  </body>
+</html>

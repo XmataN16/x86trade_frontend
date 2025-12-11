@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>x86 Trade - Вакансии</title>
+    <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header_inner">
+          <a href="index.html" class="logo">
+            <img src="images/logo.svg" alt="Логотип x86 Trade" />
+            <div class="name_logo">x86 Trade</div>
+          </a>
+          <nav class="menu">
+            <button class="menu_btn">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <ul class="menu_list">
+              <li class="menu_item">
+                <a href="index.html" class="menu_link">Главная</a>
+              </li>
+              <li class="menu_item">
+                <a href="delivery.html" class="menu_link">Доставка</a>
+              </li>
+              <li class="menu_item">
+                <a href="about.html" class="menu_link">О нас</a>
+              </li>
+              <li class="menu_item">
+                <a href="vacancy.html" class="menu_link">Вакансии</a>
+              </li>
+                            <li class="menu_item">
+                <a href="contact.html" class="menu_link">Контакты</a>
+              </li>
+            </ul>
+          </nav>
+          <ul class="user-actions">
+            <li class="user-actions_item">
+              <a href="cart.html" class="user-actions_link cart-container">
+                <img src="images/cart.svg" alt="Корзина" class="cart-icon" />
+                <span class="tooltip">Корзина</span>
+              </a>
+            </li>
+
+            <li class="user-actions_item">
+              <a href="#" class="user-actions_link profile-container">
+                <img src="images/user.svg" alt="Профиль" class="profile-icon" />
+                <span class="tooltip">Профиль</span>
+              </a>
+            </li>
+
+            <li class="user-actions_item user-actions_item-search">
+              <a href="#" class="user-actions_link search-container">
+                <img src="images/search.svg" alt="Поиск" class="search-icon" />
+                <span class="tooltip">Поиск</span>
+              </a>
+            </li>
+          </ul>
+          <div class="time-display" id="current-time"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="vacancies_list">
+        <div class="container">
+          <h2 class="section_title">Открытые вакансии</h2>
+          <p class="vacancies_intro">
+            Мы всегда рады новым талантливым специалистам, готовым расти и
+            развиваться вместе с нами! Ниже вы найдете список актуальных
+            вакансий.
+          </p>
+
+          <div class="vacancy_cards">
+            <div class="vacancy_card">
+              <h3 class="vacancy_position">
+                Специалист по подбору комплектующих (Консультант)
+              </h3>
+              <div class="vacancy_details">
+                <p class="vacancy_desc">
+                  Ищем ответственного и технически подкованного специалиста для
+                  консультации клиентов по подбору компьютерных комплектующих
+                  под их задачи.
+                </p>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Обязанности:</h4>
+                  <ul class="vacancy_list">
+                    <li>Консультировать клиентов по ассортименту товаров.</li>
+                    <li>
+                      Помогать в подборе комплектующих под конкретные цели
+                      (игры, работа, учеба).
+                    </li>
+                    <li>
+                      Оформлять заказы, работать с кассой и документацией.
+                    </li>
+                    <li>Поддерживать чистоту и порядок в зоне продаж.</li>
+                  </ul>
+                </div>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Требования:</h4>
+                  <ul class="vacancy_list">
+                    <li>
+                      Хорошее знание современных компонентов ПК (CPU, GPU, MB,
+                      RAM и т.д.).
+                    </li>
+                    <li>
+                      Коммуникабельность, вежливость, умение найти подход к
+                      клиенту.
+                    </li>
+                    <li>
+                      Опыт работы в продажах или сфере IT будет преимуществом.
+                    </li>
+                    <li>Готовность к обучению.</li>
+                  </ul>
+                </div>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Условия:</h4>
+                  <ul class="vacancy_list">
+                    <li>Оформление по ТК РФ.</li>
+                    <li>
+                      Конкурентная заработная плата (обсуждается индивидуально).
+                    </li>
+                    <li>Комфортный офисный и складской режим работы.</li>
+                    <li>
+                      Возможность профессионального роста и карьерного развития.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="vacancy_action">
+                <a
+                  href="mailto:x86trade@gmail.com?subject=Резюме на вакансию: Специалист по подбору комплектующих"
+                  class="apply_button"
+                >
+                  Отправить резюме
+                </a>
+              </div>
+            </div>
+
+            <div class="vacancy_card">
+              <h3 class="vacancy_position">Сборщик ПК</h3>
+              <div class="vacancy_details">
+                <p class="vacancy_desc">
+                  Ищем опытного сборщика ПК для выполнения заказов по сборке
+                  систем под ключ.
+                </p>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Обязанности:</h4>
+                  <ul class="vacancy_list">
+                    <li>
+                      Сборка персональных компьютеров по предоставленным
+                      конфигурациям.
+                    </li>
+                    <li>
+                      Тестирование собранных систем на стабильность и
+                      работоспособность.
+                    </li>
+                    <li>
+                      Установка базового программного обеспечения (по
+                      необходимости).
+                    </li>
+                    <li>
+                      Консультация клиента по готовому заказу (при
+                      необходимости).
+                    </li>
+                  </ul>
+                </div>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Требования:</h4>
+                  <ul class="vacancy_list">
+                    <li>Опыт самостоятельной сборки и настройки ПК.</li>
+                    <li>
+                      Понимание совместимости компонентов (CPU, MB, RAM, GPU,
+                      PSU и т.д.).
+                    </li>
+                    <li>Аккуратность, внимательность к деталям.</li>
+                    <li>
+                      Опыт работы с тестовыми утилитами (например,
+                      стресс-тесты).
+                    </li>
+                    <li>
+                      Опыт работы в сервисном центре или сборке на заказ —
+                      приветствуется.
+                    </li>
+                  </ul>
+                </div>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Условия:</h4>
+                  <ul class="vacancy_list">
+                    <li>Оформление по ТК РФ.</li>
+                    <li>Оклад + % от выполненных заказов.</li>
+                    <li>Работа в современном сервисном центре.</li>
+                    <li>Предоставляется инструмент и рабочее место.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="vacancy_action">
+                <a
+                  href="mailto:x86trade@gmail.com?subject=Резюме на вакансию: Сборщик ПК"
+                  class="apply_button"
+                >
+                  Отправить резюме
+                </a>
+              </div>
+            </div>
+
+            <div class="vacancy_card">
+              <h3 class="vacancy_position">Менеджер по работе с клиентами</h3>
+              <div class="vacancy_details">
+                <p class="vacancy_desc">
+                  Ищем активного и организованного специалиста для
+                  взаимодействия с существующими и потенциальными клиентами.
+                </p>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Обязанности:</h4>
+                  <ul class="vacancy_list">
+                    <li>Обработка входящих заявок и обращений от клиентов.</li>
+                    <li>
+                      Консультирование по услугам компании (доставка, сборка,
+                      гарантия).
+                    </li>
+                    <li>Работа с возникающими вопросами и жалобами.</li>
+                    <li>Поддержание долгосрочных отношений с клиентами.</li>
+                  </ul>
+                </div>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Требования:</h4>
+                  <ul class="vacancy_list">
+                    <li>Опыт работы в клиентоориентированной сфере.</li>
+                    <li>Отличные навыки общения (письменные и устные).</li>
+                    <li>Стрессоустойчивость, ответственность.</li>
+                    <li>
+                      Знание основ работы ПК и IT-терминологии будет плюсом.
+                    </li>
+                  </ul>
+                </div>
+                <div class="vacancy_section">
+                  <h4 class="section_subtitle">Условия:</h4>
+                  <ul class="vacancy_list">
+                    <li>Оформление по ТК РФ.</li>
+                    <li>Конкурентная заработная плата.</li>
+                    <li>Удобный график работы.</li>
+                    <li>Дружелюбная и профессиональная команда.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="vacancy_action">
+                <a
+                  href="mailto:x86trade@gmail.com?subject=Резюме на вакансию: Менеджер по работе с клиентами"
+                  class="apply_button"
+                >
+                  Отправить резюме
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer_distributed">
+      <div class="footer_left">
+        <div class="logo_footer">
+          <a href="index.html" class="logo">
+            <img src="images/logo.svg" alt="Логотип x86 Trade" />
+            <div class="name_logo">x86 Trade</div>
+          </a>
+        </div>
+        <p class="footer_links">
+          <a href="index.html" class="link_1">Главная</a>
+          <a href="delivery.html">Доставка</a>
+          <a href="vacancy.html">Вакансии</a>
+          <a href="about.html">О нас</a>
+          <a href="contact.html">Контакты</a>
+        </p>
+        <p class="footer_company_name">x86 Trade © 2025</p>
+      </div>
+      <div class="footer_center">
+        <div>
+          <img src="images/location.svg" alt="Адрес" class="footer_icon" />
+          <p><span>ул. Попова 42</span> Белгород, Россия</p>
+        </div>
+        <div>
+          <img src="images/phone.svg" alt="Телефон" class="footer_icon" />
+          <p>+7 999 999 999</p>
+        </div>
+        <div>
+          <img src="images/email.svg" alt="Почта" class="footer_icon" />
+          <p><a href="mailto:x86trade@gmail.com">x86trade@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="footer_right">
+        <p class="footer_company_about">
+          <span>О компании</span>
+          Наша компания имеет многолетний опыт сборки и тестирования
+          конфигурация, обращайтесь!.
+        </p>
+        <div class="footer_icons">
+          <a href="#" class="social_icon_link">
+            <img
+              src="images/social_network/vk.svg"
+              alt="Мы ВКонтакте"
+              class="social_icon_img"
+            />
+          </a>
+          <a href="#" class="social_icon_link">
+            <img
+              src="images/social_network/telegram.svg"
+              alt="Наш Telegram"
+              class="social_icon_img"
+            />
+          </a>
+          <a href="#" class="social_icon_link">
+            <img
+              src="images/social_network/facebook.svg"
+              alt="Наш Email"
+              class="social_icon_img"
+            />
+          </a>
+          <a href="#" class="social_icon_link">
+            <img
+              src="images/social_network/instagram.svg"
+              alt="Наш Instagram"
+              class="social_icon_img"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Получаем элементы
+      const menuBtn = document.querySelector(".menu_btn");
+      const menuList = document.querySelector(".menu_list");
+
+      // Добавляем обработчик клика
+      menuBtn.addEventListener("click", function () {
+        // Переключаем класс active
+        this.classList.toggle("active");
+        menuList.classList.toggle("active");
+      });
+    </script>
+    <script src="js/common.js"></script>
+  </body>
+</html>
