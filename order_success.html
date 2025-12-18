@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>x86 Trade - Главная</title>
-    <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon" />
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <header class="header">
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Заказ оформлен — x86 Trade</title>
+  <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+      <header class="header">
       <div class="container">
         <div class="header_inner">
           <a href="index.html" class="logo">
@@ -66,46 +64,20 @@
         </div>
       </div>
     </header>
-
-    <main class="main">
-      <section class="top">
-        <div class="container">
-          <div class="top_inner">
-            <div class="top_col top_text_col">
-              <h1 class="top_title">
-                Добро пожаловать! Вы на главной странице магазина x86 Trade.
-              </h1>
-              <p class="top_text">
-                Оптимальные цены, гарантия качества и быстрая доставка по всей
-                стране.
-              </p>
-            </div>
-
-            <div class="top_col top_image" aria-hidden="true">
-              <img src="images/image1.jpg" alt="ПК сборка" />
-            </div>
-
-            <div class="top_col top_extra">
-              <p class="top_text_right">
-                Также наш магазин предоставляет услуги по подбору комплектующих
-                и сборке ПК.
-              </p>
-            </div>
-          </div>
+  <main class="main">
+    <section class="order_success">
+      <div class="container">
+        <h2>Спасибо — ваш заказ принят</h2>
+        <div id="orderInfo">
+          <p>Номер заказа: <strong id="orderId">—</strong></p>
+          <p id="orderDetails">Загружаем информацию...</p>
         </div>
-      </section>
-
-      <section class="catalog_types">
-        <div class="catalog_title">
-          <h2>Каталог товаров</h2>
-        </div>
-        <div class="catalog_types_container catalog_types_container_cards" id="categoriesContainer">
-  <!-- categories will be rendered here -->
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer_distributed">
+        <a href="index.html" class="btn">Вернуться на главную</a>
+        <a href="profile.html" class="btn">Мои заказы</a>
+      </div>
+    </section>
+  </main>
+  <footer class="footer_distributed">
       <div class="footer_left">
         <div class="logo_footer">
           <a href="index.html" class="logo">
@@ -174,40 +146,50 @@
         </div>
       </div>
     </footer>
-
-    <script src="js/common.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/index-api.js"></script>
-
-    <!-- auth modal (вставить один раз на всех страницах) -->
-<div id="authModal" class="modal" aria-hidden="true">
-  <div class="modal_backdrop" onclick="hideAuthModal()"></div>
-  <div class="modal_content" role="dialog" aria-modal="true">
-    <button class="modal_close" id="authModalClose">&times;</button>
-
-    <div id="authTabs" style="display:flex; gap:8px; margin-bottom:12px;">
-      <button id="showLogin" type="button">Вход</button>
-      <button id="showRegister" type="button">Регистрация</button>
-    </div>
-
-    <div id="authLoginForm" class="auth-tab">
-      <form id="modalLoginForm">
-        <input id="modalLoginEmail" type="email" placeholder="Email" required />
-        <input id="modalLoginPassword" type="password" placeholder="Пароль" required />
-        <button type="submit">Войти</button>
-      </form>
-    </div>
-
-    <div id="authRegisterForm" class="auth-tab" style="display:none">
-      <form id="modalRegisterForm">
-        <input id="modalRegEmail" type="email" placeholder="Email" required />
-        <input id="modalRegPassword" type="password" placeholder="Пароль" required />
-        <input id="modalRegFirstName" type="text" placeholder="Имя" />
-        <input id="modalRegLastName" type="text" placeholder="Фамилия" />
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-    </div>
-  </div>
-</div>
-  </body>
+  
+  <script src="js/common.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    // возьмём order_id из querystring и подгрузим детали через API (опционально)
+    function getQueryParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+    (async function () {
+      const oid = getQueryParam("order_id");
+      document.getElementById("orderId").textContent = oid || "—";
+      if (!oid) {
+        document.getElementById("orderDetails").textContent = "ID заказа не передан.";
+        return;
+      }
+      try {
+        // Попытаемся получить детали заказа: GET /api/orders?id=OID
+        if (window.api && typeof window.api.apiGet === "function") {
+          const resp = await window.api.apiGet("/api/orders", { id: oid });
+          // resp may be { order: ..., items: [...] } or depending on your handler
+          if (resp.order) {
+            const o = resp.order;
+            document.getElementById("orderDetails").innerHTML =
+              `Статус: <strong>${o.status}</strong><br>Сумма: <strong>${o.total_amount} ₽</strong><br>Создан: ${o.created_at || ''}`;
+          } else if (Array.isArray(resp)) {
+            // если GetOrdersHandler возвращает массив
+            const o = resp.find(x => String(x.id) === String(oid)) || resp[0];
+            if (o) {
+              document.getElementById("orderDetails").innerHTML =
+                `Статус: <strong>${o.status}</strong><br>Сумма: <strong>${o.total_amount} ₽</strong><br>Создан: ${o.created_at || ''}`;
+            } else {
+              document.getElementById("orderDetails").textContent = "Детали заказа не найдены.";
+            }
+          } else {
+            document.getElementById("orderDetails").textContent = "Детали заказа недоступны.";
+          }
+        } else {
+          document.getElementById("orderDetails").textContent = "API недоступно.";
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById("orderDetails").textContent = "Ошибка при получении деталей заказа.";
+      }
+    })();
+  </script>
+</body>
 </html>

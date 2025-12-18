@@ -1344,6 +1344,548 @@ body {
     display: block;
 }
 
+.profile-dropdown {
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: none;
+  z-index: 2000;
+  min-width: 150px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.profile-dropdown.visible { display:block; }
+.profile-dropdown .profile-dropdown-item {
+  display:block;
+  padding:10px 14px;
+  color:#222;
+  text-decoration:none;
+}
+.profile-dropdown .profile-dropdown-item:hover { background:#f5f5f5; }
+
+.modal { position: fixed; inset: 0; display: none; z-index: 3000; }
+.modal.visible { display: block; }
+.modal_backdrop { position:absolute; inset:0; background: rgba(0,0,0,0.5); }
+.modal_content { position:relative; max-width:420px; margin:6% auto; background:#fff; padding:20px; border-radius:8px; z-index:3100; }
+.modal_close { position:absolute; right:10px; top:10px; background:none; border:0; font-size:20px; cursor:pointer;}
+
+/* --- Страница профиля --- */
+.profile_section {
+  padding: 60px 0;
+  background-color: #ffffff;
+  border-bottom: 3px solid black;
+}
+
+.profile_section .container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profile_section h2 {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #151618;
+}
+
+#profileForm {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#profileForm div {
+  margin-bottom: 20px;
+}
+
+#profileForm label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #151618;
+}
+
+#profileForm input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+#profileForm input:focus {
+  outline: none;
+  border-color: #ff6633;
+  box-shadow: 0 0 5px rgba(255, 102, 51, 0.3);
+}
+
+#profileForm input:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+#saveProfileBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6633;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#saveProfileBtn:hover {
+  background-color: #e55a2b;
+}
+
+/* --- Страница оформления заказа --- */
+.checkout_section {
+  padding: 60px 0;
+  background-color: #ffffff;
+  border-bottom: 3px solid black;
+}
+
+#checkoutForm {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#checkoutCart {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.checkout_items {
+  margin-bottom: 20px;
+}
+
+.checkout_item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.checkout_item:last-child {
+  border-bottom: none;
+}
+
+.checkout_total {
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #151618;
+}
+
+#checkoutForm h3 {
+  font-size: 24px;
+  margin: 30px 0 15px 0;
+  color: #151618;
+  border-bottom: 2px solid #444444;
+  padding-bottom: 8px;
+}
+
+#checkoutForm select,
+#checkoutForm input,
+#checkoutForm textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+#checkoutForm select:focus,
+#checkoutForm input:focus,
+#checkoutForm textarea:focus {
+  outline: none;
+  border-color: #ff6633;
+  box-shadow: 0 0 5px rgba(255, 102, 51, 0.3);
+}
+
+#checkoutForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+#placeOrderBtn {
+  width: 100%;
+  padding: 14px;
+  background-color: #ff6633;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+}
+
+#placeOrderBtn:hover {
+  background-color: #e55a2b;
+}
+
+#checkoutMessage {
+  text-align: center;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+#checkoutMessage.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+#checkoutMessage.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* --- Страница успешного заказа --- */
+.order_success {
+  padding: 80px 0;
+  background-color: #ffffff;
+  border-bottom: 3px solid black;
+  text-align: center;
+}
+
+.order_success h2 {
+  font-size: 40px;
+  color: #151618;
+  margin-bottom: 30px;
+}
+
+#orderInfo {
+  margin: 30px auto;
+  max-width: 600px;
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#orderInfo p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #151618;
+}
+
+#orderInfo strong {
+  color: #ff6633;
+}
+
+.order_success .btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 30px;
+  background-color: #ff6633;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.order_success .btn:hover {
+  background-color: #e55a2b;
+}
+
+/* --- Модальное окно авторизации/регистрации --- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  z-index: 3000;
+}
+
+.modal.visible {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal_backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal_content {
+  position: relative;
+  max-width: 420px;
+  width: 90%;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 3100;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal.visible .modal_content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal_close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s ease;
+}
+
+.modal_close:hover {
+  color: #333;
+}
+
+/* Вкладки авторизации/регистрации */
+#authTabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+#authTabs button {
+  flex: 1;
+  padding: 10px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#authTabs button:hover {
+  background-color: #ddd;
+}
+
+#authTabs button:active {
+  transform: translateY(1px);
+}
+
+#authTabs button.active {
+  background-color: #ff6633;
+  color: white;
+  border-color: #ff6633;
+}
+
+/* Формы авторизации и регистрации */
+.auth-tab form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-tab input {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.auth-tab input:focus {
+  outline: none;
+  border-color: #ff6633;
+  box-shadow: 0 0 5px rgba(255, 102, 51, 0.3);
+}
+
+.auth-tab button {
+  padding: 12px;
+  background-color: #ff6633;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.auth-tab button:hover {
+  background-color: #e55a2b;
+}
+
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+  .profile_section, 
+  .checkout_section, 
+  .order_success {
+    padding: 40px 0;
+  }
+  
+  .profile_section h2,
+  .order_success h2 {
+    font-size: 32px;
+  }
+  
+  #profileForm,
+  #orderInfo {
+    padding: 20px;
+  }
+  
+  #profileForm input,
+  #checkoutForm select,
+  #checkoutForm input,
+  #checkoutForm textarea {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+  
+  #saveProfileBtn,
+  #placeOrderBtn {
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .modal_content {
+    padding: 20px;
+    max-width: 90%;
+  }
+  
+  #authTabs button {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .auth-tab input,
+  .auth-tab button {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile_section, 
+  .checkout_section, 
+  .order_success {
+    padding: 30px 0;
+  }
+  
+  .profile_section h2,
+  .order_success h2 {
+    font-size: 28px;
+  }
+  
+  #profileForm,
+  #orderInfo {
+    padding: 15px;
+  }
+  
+  #checkoutCart {
+    padding: 15px;
+  }
+  
+  .checkout_item {
+    font-size: 14px;
+  }
+  
+  .checkout_total {
+    font-size: 18px;
+  }
+  
+  #checkoutForm h3 {
+    font-size: 20px;
+    margin: 20px 0 10px 0;
+  }
+  
+  #saveProfileBtn,
+  #placeOrderBtn,
+  .order_success .btn {
+    padding: 10px;
+    font-size: 15px;
+  }
+  
+  .order_success .btn {
+    display: block;
+    margin: 10px auto;
+    width: 90%;
+  }
+  
+  #authTabs {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #authTabs button {
+    width: 100%;
+  }
+}
+
+/* Выравнивание кнопки "Оформить заказ" по правому краю */
+.cart_actions {
+  justify-content: flex-end;
+}
+
+/* Убедимся, что кнопка имеет правильные стили */
+.checkout_btn {
+  padding: 12px 24px;
+  background-color: #ff6633;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.checkout_btn:hover {
+  background-color: #e55a2b;
+}
+
+/* Для пустой корзины */
+.empty_cart .continue_shopping_btn {
+  background-color: #ff6633;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.empty_cart .continue_shopping_btn:hover {
+  background-color: #e55a2b;
+}
+
 /* --- Адаптивность --- */
 
 /* --- 1200px и меньше --- */
