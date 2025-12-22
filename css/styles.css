@@ -1886,6 +1886,178 @@ body {
   background-color: #e55a2b;
 }
 
+/* --- Профиль (вкладки и заказы) --- */
+.profile_tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #444444;
+}
+.tab_btn {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  font-size: 16px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+.tab_btn:hover {
+  color: #ff6633;
+}
+.tab_btn.active {
+  color: #ff6633;
+  border-bottom: 2px solid #ff6633;
+  font-weight: 500;
+}
+.tab_content {
+  display: none;
+}
+.tab_content.active {
+  display: block;
+}
+.orders_list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.order_card {
+  background: #f9f9f9;
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #ff6633;
+}
+.order_header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.order_number {
+  font-weight: bold;
+  font-size: 18px;
+  color: #151618;
+}
+.order_status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.order_status.created {
+  background-color: #e9ecef;
+  color: #495057;
+}
+.order_status.processing {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.order_status.shipped {
+  background-color: #cce5ff;
+  color: #004085;
+}
+.order_status.delivered {
+  background-color: #d4edda;
+  color: #155724;
+}
+.order_status.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+.order_date {
+  color: #6c757d;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.order_items {
+  margin: 15px 0;
+}
+.order_item {
+  display: flex;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.order_item:last-child {
+  border-bottom: none;
+}
+.order_item_img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: 15px;
+}
+.order_item_details {
+  flex: 1;
+}
+.order_item_name {
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+.order_item_quantity {
+  font-size: 14px;
+  color: #6c757d;
+}
+.order_total {
+  text-align: right;
+  font-weight: bold;
+  font-size: 18px;
+  color: #ff6633;
+  margin-top: 15px;
+}
+.order_actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+.order_btn {
+  padding: 8px 15px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+.order_details_btn {
+  background-color: #ff6633;
+  color: white;
+}
+.order_details_btn:hover {
+  background-color: #e55a2b;
+}
+.order_cancel_btn {
+  background-color: #dc3545;
+  color: white;
+}
+.order_cancel_btn:hover {
+  background-color: #c82333;
+}
+.order_cancel_btn:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+.order_delivery {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+.order_delivery_title {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.no_orders {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+}
+.loader {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+}
+
 /* --- Адаптивность --- */
 
 /* --- 1200px и меньше --- */

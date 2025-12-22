@@ -65,18 +65,43 @@
       </div>
     </header>
   <main class="main">
-    <section class="profile_section">
-      <div class="container">
-        <h2>Профиль</h2>
-        <form id="profileForm">
-          <div><label>Email</label><input id="profileEmail" disabled /></div>
-          <div><label>Имя</label><input id="profileFirstName" /></div>
-          <div><label>Фамилия</label><input id="profileLastName" /></div>
-          <div><label>Телефон</label><input id="profilePhone" /></div>
-          <div><button id="saveProfileBtn" type="submit">Сохранить</button></div>
-        </form>
+<section class="profile_section">
+  <div class="container">
+    <h2>Профиль</h2>
+    <div class="profile_tabs">
+      <button class="tab_btn active" data-tab="personal">Личные данные</button>
+      <button class="tab_btn" data-tab="orders">Мои заказы</button>
+      <button class="tab_btn" data-tab="addresses">Адреса доставки</button>
+    </div>
+    
+    <div class="tab_content active" id="personal_tab">
+      <form id="profileForm">
+        <div><label>Email</label><input id="profileEmail" disabled /></div>
+        <div><label>Имя</label><input id="profileFirstName" /></div>
+        <div><label>Фамилия</label><input id="profileLastName" /></div>
+        <div><label>Телефон</label><input id="profilePhone" /></div>
+        <div><button id="saveProfileBtn" type="submit">Сохранить</button></div>
+      </form>
+    </div>
+    
+    <div class="tab_content" id="orders_tab">
+      <h3>История заказов</h3>
+      <div id="ordersContainer">
+        <!-- Заказы будут загружены через JavaScript -->
+        <div class="loader">Загрузка заказов...</div>
       </div>
-    </section>
+    </div>
+    
+    <div class="tab_content" id="addresses_tab">
+      <h3>Сохраненные адреса</h3>
+      <div id="addressesContainer">
+        <!-- Адреса будут загружены через JavaScript -->
+        <p>У вас пока нет сохраненных адресов.</p>
+        <button id="addAddressBtn" class="btn primary">Добавить адрес</button>
+      </div>
+    </div>
+  </div>
+</section>
   </main>
 
       <footer class="footer_distributed">
