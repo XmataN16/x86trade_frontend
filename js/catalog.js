@@ -221,35 +221,37 @@ async function addToCart(e) {
   const productId = parseInt(btn.dataset.id);
   const name = btn.dataset.name || "";
   const price = parseFloat(btn.dataset.price) || 0;
-
-  // если пользователь авторизован — добавляем на сервер
-  if (window.api && window.api.isAuthenticated()) {
-    try {
+  
+  // Блокируем кнопку во время запроса
+  btn.disabled = true;
+  btn.textContent = "Добавление...";
+  
+  try {
+    if (window.api && window.api.isAuthenticated()) {
       await window.api.apiPost("/api/cart", { product_id: productId, quantity: 1 });
-      alert(`Товар "${name}" добавлен в корзину (на сервер).`);
-      // обновим счётчик корзины (см. common.js)
+      window.toast.success(`Товар "${name}" добавлен в корзину`);
       if (window.updateCartCount) window.updateCartCount();
-      return;
-    } catch (err) {
-      console.error("Add to cart (server) error", err);
-      alert("Ошибка добавления в корзину: " + (err.message || err));
-      return;
+    } else {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(it => it.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        const img = './images/catalog_types/cpu.svg';
+        cart.push({ id: productId, name, price, quantity: 1, image: img });
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.toast.success(`Товар "${name}" добавлен в корзину`);
+      if (window.updateCartCount) window.updateCartCount();
     }
+  } catch (err) {
+    console.error("Add to cart error", err);
+    window.toast.error("Ошибка добавления в корзину: " + (err.message || err));
+  } finally {
+    // Восстанавливаем кнопку
+    btn.disabled = false;
+    btn.textContent = "Добавить в корзину";
   }
-
-  // иначе — guest cart в localStorage (существующая логика)
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const existing = cart.find(it => it.id === productId);
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    // постараемся найти картинку в products (если используете products array)
-    const img = (window.products && products.find(p => p.id === productId)?.image) || './images/catalog_types/cpu.svg';
-    cart.push({ id: productId, name, price, quantity: 1, image: img });
-  }
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(`Товар "${name}" добавлен в корзину (гостевая корзина).`);
-  if (window.updateCartCount) window.updateCartCount();
 }
 
 

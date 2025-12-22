@@ -39,25 +39,60 @@ async function loadCartItems() {
 async function renderCart() {
   const container = document.getElementById("cartContent");
   if (!container) return;
+  
   const items = await loadCartItems();
+  const cartActions = document.getElementById("cartActions");
+  
   if (!items || items.length === 0) {
-    container.innerHTML = `<div class="empty_cart"><p>Ваша корзина пуста.</p><a href="catalog.html" class="continue_shopping_btn">Продолжить покупки</a></div>`;
+    container.innerHTML = `<div class="empty_cart">
+      <p>Ваша корзина пуста.</p>
+      <p>Чтобы продолжить, добавьте товары в корзину.</p>
+      <a href="catalog.html" class="continue_shopping_btn">Продолжить покупки</a>
+    </div>`;
+    
+    // Скрываем кнопку оформления заказа при пустой корзине
+    if (cartActions) {
+      cartActions.style.display = 'none';
+    }
     return;
   }
+  
+  // Показываем кнопку оформления заказа при наличии товаров
+  if (cartActions) {
+    cartActions.style.display = 'block';
+  }
+  
   let total = 0;
-  let html = `<div class="cart_items"><div class="cart_header"><div>Товар</div><div>Цена</div><div>Кол-во</div><div>Сумма</div><div></div></div>`;
+  let html = `<div class="cart_items">
+    <div class="cart_header">
+      <div>Товар</div>
+      <div>Цена</div>
+      <div>Кол-во</div>
+      <div>Сумма</div>
+      <div></div>
+    </div>`;
+  
   for (const it of items) {
     const sum = (parseFloat(it.price) || 0) * (it.quantity || 0);
     total += sum;
     html += `<div class="cart_item">
-      <div class="cart_col cart_product"><img src="${it.image}" class="cart_product_img"><span class="cart_product_name">${escapeHtml(it.name)}</span></div>
+      <div class="cart_col cart_product">
+        <img src="${it.image}" class="cart_product_img">
+        <span class="cart_product_name">${escapeHtml(it.name)}</span>
+      </div>
       <div class="cart_col">${formatPrice(it.price)}</div>
       <div class="cart_col">${it.quantity}</div>
       <div class="cart_col">${formatPrice(sum)}</div>
-      <div class="cart_col"><button class="remove_btn" data-id="${it.product_id}">Удалить</button></div>
+      <div class="cart_col">
+        <button class="remove_btn" data-id="${it.product_id}">Удалить</button>
+      </div>
     </div>`;
   }
-  html += `</div><div class="cart_total"><strong>Итого: ${formatPrice(total)}</strong></div>`;
+  html += `</div>
+    <div class="cart_total">
+      <strong>Итого: ${formatPrice(total)}</strong>
+    </div>`;
+  
   container.innerHTML = html;
 
   // attach remove handlers

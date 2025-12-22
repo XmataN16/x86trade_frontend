@@ -220,3 +220,40 @@ document.addEventListener("DOMContentLoaded", function () {
   updateAuthUI();
   updateCartCount();
 });
+
+function showLoader(element, message = "Загрузка...") {
+  if (!element) return;
+  
+  // Сохраняем оригинальное содержимое
+  if (!element.dataset.originalContent) {
+    element.dataset.originalContent = element.innerHTML;
+  }
+  
+  // Создаем прелоадер
+  element.innerHTML = `
+    <div class="loader-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100px;">
+      <div class="spinner" style="width: 40px; height: 40px; border: 4px solid rgba(0,0,0,0.1); border-radius: 50%; border-top-color: #ff6633; animation: spin 1s linear infinite;"></div>
+      <p style="margin-top: 10px; color: #666;">${escapeHtml(message)}</p>
+    </div>
+  `;
+  
+  // Добавляем анимацию для спиннера
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function hideLoader(element) {
+  if (!element || !element.dataset.originalContent) return;
+  element.innerHTML = element.dataset.originalContent;
+  delete element.dataset.originalContent;
+}
+
+// Экспортируем функции
+window.showLoader = showLoader;
+window.hideLoader = hideLoader;

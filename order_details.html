@@ -203,7 +203,7 @@
             <h3>Товары в заказе</h3>
             ${items.map(item => `
               <div class="order_item">
-                <img src="${getImagePath(item.image_path || './images/catalog_types/cpu.svg')}" class="order_item_img" alt="${item.product_name || 'Товар'}">
+                <img src="${normalizeImageSrc(item.image_path || './images/catalog_types/cpu.svg')}" class="order_item_img" alt="${item.product_name || 'Товар'}">
                 <div class="order_item_details">
                   <div class="order_item_name">${item.product_name || 'Товар #' + item.product_id}</div>
                   <div class="order_item_quantity">${item.quantity} × ${(item.price_per_unit || 0).toFixed(2)} ₽</div>
@@ -285,6 +285,42 @@
   });
 
   // Вспомогательные функции
+  function normalizeImageSrc(imagePath) {
+  // Путь по умолчанию для изображений
+  const defaultImg = './images/catalog_types/cpu.svg';
+  
+  if (!imagePath) return defaultImg;
+  
+  const ip = String(imagePath).trim().replace(/\\/g, '/');
+  const baseOrigin = window.location.origin;
+  
+  // Проверяем, если это уже полный URL
+  if (/^https?:\/\//i.test(ip)) {
+    return ip;
+  }
+  
+  // Если путь начинается со слеша - абсолютный путь на фронтенде
+  if (ip.startsWith('/')) {
+    return baseOrigin + ip;
+  }
+  
+  // Если путь начинается с images/ - относительный путь
+  if (/^images\//i.test(ip)) {
+    return baseOrigin + '/' + ip;
+  }
+  
+  // Если это файловая система (Windows или file://)
+  if (/^[a-zA-Z]:[\\/]/.test(ip) || /^file:\/\//i.test(ip) || ip.includes('\\')) {
+    const base = ip.replace(/^.*[\\/]/, '');
+    return `${baseOrigin}/images/products/${encodeURIComponent(base)}`;
+  }
+  
+  // По умолчанию считаем, что это имя файла в папке images/products
+  const base = ip.replace(/^.*[\\/]/, '');
+  return `${baseOrigin}/images/products/${encodeURIComponent(base)}`;
+}
+
+
   function formatDate(dateString) {
     if (!dateString) return '';
     try {
