@@ -1,92 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>x86 Trade - Корзина</title>
-    <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon" />
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <header class="header">
-      <div class="container">
-        <div class="header_inner">
-          <a href="index.html" class="logo">
-            <img src="images/logo.svg" alt="Логотип x86 Trade" />
-            <div class="name_logo">x86 Trade</div>
-          </a>
-          <nav class="menu">
-            <button class="menu_btn">
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-            <ul class="menu_list">
-              <li class="menu_item">
-                <a href="index.html" class="menu_link">Главная</a>
-              </li>
-              <li class="menu_item">
-                <a href="delivery.html" class="menu_link">Доставка</a>
-              </li>
-              <li class="menu_item">
-                <a href="about.html" class="menu_link">О нас</a>
-              </li>
-              <li class="menu_item">
-                <a href="vacancy.html" class="menu_link">Вакансии</a>
-              </li>
-              <li class="menu_item">
-                <a href="contact.html" class="menu_link">Контакты</a>
-              </li>
-            </ul>
-          </nav>
-          <ul class="user-actions">
-            <li class="user-actions_item">
-              <a href="cart.html" class="user-actions_link cart-container">
-                <img src="images/cart.svg" alt="Корзина" class="cart-icon" />
-                <span class="tooltip">Корзина</span>
-              </a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x86 Trade - Детали товара</title>
+  <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header_inner">
+        <a href="index.html" class="logo">
+          <img src="images/logo.svg" alt="Логотип x86 Trade">
+          <div class="name_logo">x86 Trade</div>
+        </a>
+        <nav class="menu">
+          <button class="menu_btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul class="menu_list">
+            <li class="menu_item">
+              <a href="index.html" class="menu_link">Главная</a>
             </li>
-
-            <li class="user-actions_item">
-              <a href="#" class="user-actions_link profile-container">
-                <img src="images/user.svg" alt="Профиль" class="profile-icon" />
-                <span class="tooltip">Профиль</span>
-              </a>
+            <li class="menu_item">
+              <a href="catalog.html" class="menu_link">Каталог</a>
             </li>
-
-            <li class="user-actions_item user-actions_item-search">
-              <a href="#" class="user-actions_link search-container">
-                <img src="images/search.svg" alt="Поиск" class="search-icon" />
-                <span class="tooltip">Поиск</span>
-              </a>
+            <li class="menu_item">
+              <a href="delivery.html" class="menu_link">Доставка</a>
+            </li>
+            <li class="menu_item">
+              <a href="vacancy.html" class="menu_link">Вакансии</a>
+            </li>
+            <li class="menu_item">
+              <a href="contact.html" class="menu_link">Контакты</a>
             </li>
           </ul>
-          <!-- Блок с текущим временем -->
-          <div class="time-display" id="current-time"></div>
+        </nav>
+        <ul class="user-actions">
+          <li class="user-actions_item">
+            <a href="cart.html" class="user-actions_link cart-container">
+              <img src="images/cart.svg" alt="Корзина" class="cart-icon">
+              <span class="tooltip">Корзина</span>
+            </a>
+          </li>
+          <li class="user-actions_item">
+            <div class="user-actions_link profile-container" style="position:relative;">
+              <!-- Контент будет отрисован JS -->
+            </div>
+          </li>
+          <li class="user-actions_item user-actions_item-search">
+            <a href="#" class="user-actions_link search-container">
+              <img src="images/search.svg" alt="Поиск" class="search-icon">
+              <span class="tooltip">Поиск</span>
+            </a>
+          </li>
+        </ul>
+        <div class="time-display" id="current-time"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="product_detail_section">
+      <div class="container">
+        <div id="productDetailContainer">
+          <div class="loader">Загрузка деталей товара...</div>
+        </div>
+        <div class="product_back_link">
+          <a href="catalog.html" class="btn secondary">Вернуться в каталог</a>
         </div>
       </div>
-    </header>
+    </section>
+  </main>
 
-    <main class="main">
-      <section class="cart_page">
-        <div class="container">
-          <h2 class="section_title">Ваша корзина</h2>
-          <div id="cartContent">
-            <!-- Содержимое корзины будет добавлено через JS -->
-          </div>
-          <div class="cart_actions" id="cartActions">
-  <a id="goToCheckoutBtn" class="btn primary" href="checkout.html">Перейти к оформлению заказа</a>
-</div>
-        </div>
-
-      </section>
-    </main>
-
-    <footer class="footer_distributed">
+      <footer class="footer_distributed">
       <div class="footer_left">
         <div class="logo_footer">
           <a href="index.html" class="logo">
-            <img src="images/logo.svg" alt="Логотип x86 Trade" />
+            <img src="images/logo.svg" alt="" />
             <div class="name_logo">x86 Trade</div>
           </a>
         </div>
@@ -152,21 +146,23 @@
       </div>
     </footer>
 
-    <script src="js/common.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/cart.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/product_detail.js"></script>
 
-    <div id="authModal" class="modal" aria-hidden="true">
+  <!-- Модальное окно авторизации/регистрации -->
+<div id="authModal" class="modal" aria-hidden="true">
   <div class="modal_backdrop" onclick="hideAuthModal()"></div>
   <div class="modal_content" role="dialog" aria-modal="true">
     <button class="modal_close" id="authModalClose">&times;</button>
 
     <div id="authTabs" style="display:flex; gap:8px; margin-bottom:12px;">
-      <button id="showLogin" type="button">Вход</button>
+      <button id="showLogin" type="button" class="active">Вход</button>
       <button id="showRegister" type="button">Регистрация</button>
     </div>
 
-    <div id="authLoginForm" class="auth-tab">
+    <div id="authLoginForm" class="auth-tab active">
       <form id="modalLoginForm">
         <input id="modalLoginEmail" type="email" placeholder="Email" required />
         <input id="modalLoginPassword" type="password" placeholder="Пароль" required />
@@ -174,7 +170,7 @@
       </form>
     </div>
 
-    <div id="authRegisterForm" class="auth-tab" style="display:none">
+    <div id="authRegisterForm" class="auth-tab">
       <form id="modalRegisterForm">
         <input id="modalRegEmail" type="email" placeholder="Email" required />
         <input id="modalRegPassword" type="password" placeholder="Пароль" required />
@@ -185,5 +181,5 @@
     </div>
   </div>
 </div>
-  </body>
+</body>
 </html>

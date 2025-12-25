@@ -199,5 +199,35 @@
 
     <script src="js/common.js"></script>
     <script src="js/contact.js"></script>
+
+    <div id="authModal" class="modal" aria-hidden="true">
+  <div class="modal_backdrop" onclick="hideAuthModal()"></div>
+  <div class="modal_content" role="dialog" aria-modal="true">
+    <button class="modal_close" id="authModalClose">&times;</button>
+
+    <div id="authTabs" style="display:flex; gap:8px; margin-bottom:12px;">
+      <button id="showLogin" type="button">Вход</button>
+      <button id="showRegister" type="button">Регистрация</button>
+    </div>
+
+    <div id="authLoginForm" class="auth-tab">
+      <form id="modalLoginForm">
+        <input id="modalLoginEmail" type="email" placeholder="Email" required />
+        <input id="modalLoginPassword" type="password" placeholder="Пароль" required />
+        <button type="submit">Войти</button>
+      </form>
+    </div>
+
+    <div id="authRegisterForm" class="auth-tab" style="display:none">
+      <form id="modalRegisterForm">
+        <input id="modalRegEmail" type="email" placeholder="Email" required />
+        <input id="modalRegPassword" type="password" placeholder="Пароль" required />
+        <input id="modalRegFirstName" type="text" placeholder="Имя" />
+        <input id="modalRegLastName" type="text" placeholder="Фамилия" />
+        <button type="submit">Зарегистрироваться</button>
+      </form>
+    </div>
+  </div>
+</div>
   </body>
 </html>

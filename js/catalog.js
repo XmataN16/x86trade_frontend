@@ -1,8 +1,3 @@
-// js/catalog.js
-// Полный рабочий файл каталога товаров.
-// Зависимость: предпочтительно подключить js/api.js с функцией apiGet(path, params).
-// Если apiGet не определён — создаём fallback, направляющий запросы на http://localhost:8080.
-
 (function () {
   // --- Fallback apiGet (если не определён) ---
   if (typeof window.apiGet !== 'function') {
@@ -113,6 +108,19 @@
     return params;
   }
 
+  // --- Product card click handler ---
+  function handleProductClick(e) {
+    // Если клик по кнопке "Добавить в корзину", не перенаправляем
+    if (e.target.closest('.add_to_cart_btn')) {
+      return;
+    }
+    
+    const productId = this.dataset.id;
+    if (productId) {
+      window.location.href = `product_detail.html?id=${productId}`;
+    }
+  }
+
   // --- DOM rendering ---
   function renderProductsGrid(products) {
     const grid = document.getElementById("productsGrid");
@@ -126,6 +134,8 @@
       const imgSrc = normalizeImageSrc(p);
       const card = document.createElement("div");
       card.className = "product_card";
+      card.dataset.id = p.id; // Сохраняем ID товара в dataset карточки
+      
       card.innerHTML = `
         <div class="product_image">
           <img src="${imgSrc}" alt="${escapeHtml(p.name || '')}" loading="lazy">
@@ -139,9 +149,18 @@
       `;
       grid.appendChild(card);
     });
+    
+    // Удаляем старые обработчики и добавляем новые для всех карточек товаров
+    document.querySelectorAll(".product_card").forEach(card => {
+      card.removeEventListener('click', handleProductClick);
+      card.addEventListener('click', handleProductClick);
+    });
+    
     // attach add-to-cart handlers (stub)
-    document.querySelectorAll(".add_to_cart_btn").forEach(btn => btn.removeEventListener('click', addToCart));
-    document.querySelectorAll(".add_to_cart_btn").forEach(btn => btn.addEventListener("click", addToCart));
+    document.querySelectorAll(".add_to_cart_btn").forEach(btn => {
+      btn.removeEventListener('click', addToCart);
+      btn.addEventListener("click", addToCart);
+    });
   }
 
   // --- Loaders ---
@@ -216,45 +235,43 @@
 
   // --- Stub / utility: addToCart ---
   // заменить существующую функцию addToCart в js/catalog.js
-async function addToCart(e) {
-  const btn = e.currentTarget;
-  const productId = parseInt(btn.dataset.id);
-  const name = btn.dataset.name || "";
-  const price = parseFloat(btn.dataset.price) || 0;
-  
-  // Блокируем кнопку во время запроса
-  btn.disabled = true;
-  btn.textContent = "Добавление...";
-  
-  try {
-    if (window.api && window.api.isAuthenticated()) {
-      await window.api.apiPost("/api/cart", { product_id: productId, quantity: 1 });
-      window.toast.success(`Товар "${name}" добавлен в корзину`);
-      if (window.updateCartCount) window.updateCartCount();
-    } else {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const existing = cart.find(it => it.id === productId);
-      if (existing) {
-        existing.quantity += 1;
+  async function addToCart(e) {
+    const btn = e.currentTarget;
+    const productId = parseInt(btn.dataset.id);
+    const name = btn.dataset.name || "";
+    const price = parseFloat(btn.dataset.price) || 0;
+    
+    // Блокируем кнопку во время запроса
+    btn.disabled = true;
+    btn.textContent = "Добавление...";
+    
+    try {
+      if (window.api && window.api.isAuthenticated()) {
+        await window.api.apiPost("/api/cart", { product_id: productId, quantity: 1 });
+        window.toast.success(`Товар "${name}" добавлен в корзину`);
+        if (window.updateCartCount) window.updateCartCount();
       } else {
-        const img = './images/catalog_types/cpu.svg';
-        cart.push({ id: productId, name, price, quantity: 1, image: img });
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existing = cart.find(it => it.id === productId);
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          const img = './images/catalog_types/cpu.svg';
+          cart.push({ id: productId, name, price, quantity: 1, image: img });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        window.toast.success(`Товар "${name}" добавлен в корзину`);
+        if (window.updateCartCount) window.updateCartCount();
       }
-      localStorage.setItem("cart", JSON.stringify(cart));
-      window.toast.success(`Товар "${name}" добавлен в корзину`);
-      if (window.updateCartCount) window.updateCartCount();
+    } catch (err) {
+      console.error("Add to cart error", err);
+      window.toast.error("Ошибка добавления в корзину: " + (err.message || err));
+    } finally {
+      // Восстанавливаем кнопку
+      btn.disabled = false;
+      btn.textContent = "Добавить в корзину";
     }
-  } catch (err) {
-    console.error("Add to cart error", err);
-    window.toast.error("Ошибка добавления в корзину: " + (err.message || err));
-  } finally {
-    // Восстанавливаем кнопку
-    btn.disabled = false;
-    btn.textContent = "Добавить в корзину";
   }
-}
-
-
 
   // Экспорт (если нужно)
   window.catalogUtils = {
