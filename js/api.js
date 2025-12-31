@@ -47,11 +47,11 @@ async function tryRefreshToken() {
 // Универсальная обёртка для fetch с автоматическим retry при 401 (попытка refresh)
 async function apiFetch(method, path, body = null, params = {}) {
   const url = new URL(API_BASE + path);
-  Object.keys(params).forEach(k => {
-    if (params[k] !== undefined && params[k] !== null && params[k] !== "") {
-      url.searchParams.append(k, params[k]);
-    }
-  });
+    Object.keys(params).forEach(key => {
+        if (params[key] !== undefined && params[key] !== null && params[key] !== '') {
+            url.searchParams.append(key, params[key]);
+        }
+    });
 
   async function doFetch() {
     const headers = {};

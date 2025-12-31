@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель x86 Trade</title>
+    <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <main class="main">
+        <section class="admin-section section">
+            <div class="container">
+                <div class="admin-container">
+                    <div class="admin-sidebar">
+                        <div class="admin-logo">
+                            <img src="images/logo.svg" alt="x86 Trade Admin">
+                            <h2>Админ-панель</h2>
+                        </div>
+                        <nav class="admin-menu">
+                            <ul>
+                                <li class="menu-item active" data-section="dashboard">
+                                    <a href="#">Главная</a>
+                                </li>
+                                <li class="menu-item" data-section="users">
+                                    <a href="#">Пользователи</a>
+                                </li>
+                                <li class="menu-item" data-section="products">
+                                    <a href="#">Товары</a>
+                                </li>
+                                <li class="menu-item" data-section="categories">
+                                    <a href="#">Категории</a>
+                                </li>
+                                <li class="menu-item" data-section="manufacturers">
+                                    <a href="#">Производители</a>
+                                </li>
+                                <li class="menu-item" data-section="delivery-methods">
+                                    <a href="#">Способы доставки</a>
+                                </li>
+                                <li class="menu-item" data-section="payment-methods">
+                                    <a href="#">Способы оплаты</a>
+                                </li>
+                                <li class="menu-item" data-section="vacancies">
+                                    <a href="#">Вакансии</a>
+                                </li>
+                                <li class="menu-item" data-section="characteristics">
+                                    <a href="#">Характеристики</a>
+                                </li>
+                                <li class="menu-item" data-section="orders">
+                                    <a href="#">Заказы</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="admin-stats">
+                            <div class="stat">
+                                <div class="stat-value" id="total-users">0</div>
+                                <div class="stat-label">Пользователи</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="total-products">0</div>
+                                <div class="stat-label">Товары</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="total-orders">0</div>
+                                <div class="stat-label">Заказы</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-content">
+                        <!-- Главная страница (Дашборд) -->
+                        <div id="admin-section-dashboard" class="admin-section-content active">
+                            <h2 class="section_title">Главная</h2>
+                            <div class="dashboard-stats">
+                                <div class="stat-card">
+                                    <h3>Статистика</h3>
+                                    <div class="stats-grid">
+                                        <div class="stat-item">
+                                            <div class="stat-label">Активные пользователи</div>
+                                            <div class="stat-value" id="active-users">0</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-label">Новые заказы</div>
+                                            <div class="stat-value" id="new-orders">0</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-label">Товаров в наличии</div>
+                                            <div class="stat-value" id="available-products">0</div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-label">Выручка (месяц)</div>
+                                            <div class="stat-value" id="monthly-revenue">0 ₽</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <h3>Последние заказы</h3>
+                                    <div class="admin-table-container">
+                                        <table class="admin-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Пользователь</th>
+                                                    <th>Сумма</th>
+                                                    <th>Статус</th>
+                                                    <th>Дата</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="recent-orders">
+                                                <tr>
+                                                    <td colspan="5" class="no-data">Загрузка...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <h3>Новые пользователи</h3>
+                                    <div class="admin-table-container">
+                                        <table class="admin-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Имя</th>
+                                                    <th>Email</th>
+                                                    <th>Дата регистрации</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="recent-users">
+                                                <tr>
+                                                    <td colspan="4" class="no-data">Загрузка...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Пользователи -->
+                        <div id="admin-section-users" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Пользователи</h2>
+                                <button class="btn primary" id="add-user-row">+ Добавить пользователя</button>
+                            </div>
+                            <div class="admin-filters">
+                                <div class="filter-group">
+                                    <label for="user-search">Поиск:</label>
+                                    <input type="text" id="user-search" class="form-input" placeholder="Поиск по имени, email...">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="user-role">Роль:</label>
+                                    <select id="user-role" class="form-select">
+                                        <option value="all">Все</option>
+                                        <option value="admin">Администраторы</option>
+                                        <option value="user">Пользователи</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Имя</th>
+                                            <th>Фамилия</th>
+                                            <th>Отчество</th>
+                                            <th>Email</th>
+                                            <th>Телефон</th>
+                                            <th>Роль</th>
+                                            <th>Дата регистрации</th>
+                                            <th>Действия</th>
+                                            <th>Пароль</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="users-table-body">
+                                        <tr>
+                                            <td colspan="7" class="no-data">Загрузка пользователей...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="users-pagination"></div>
+                        </div>
+
+                        <!-- Товары -->
+                        <div id="admin-section-products" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Товары</h2>
+                                <button class="btn primary" id="add-product-row">+ Добавить товар</button>
+                            </div>
+                            <div class="admin-filters">
+                                <div class="filter-group">
+                                    <label for="product-search">Поиск:</label>
+                                    <input type="text" id="product-search" class="form-input" placeholder="Поиск по названию...">
+                                </div>
+                                <div class="filter-group">
+                                    <label for="product-category">Категория:</label>
+                                    <select id="product-category" class="form-select">
+                                        <option value="all">Все категории</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label for="product-manufacturer">Производитель:</label>
+                                    <select id="product-manufacturer" class="form-select">
+                                        <option value="all">Все производители</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Описание</th>
+                                            <th>SKU</th>
+                                            <th>Цена</th>
+                                            <th>Категория</th>
+                                            <th>Производитель</th>
+                                            <th>Путь к img</th>
+                                            <th>В наличии</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="products-table-body">
+                                        <tr>
+                                            <td colspan="7" class="no-data">Загрузка товаров...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="products-pagination"></div>
+                        </div>
+                        
+                        <!-- Категории -->
+                        <div id="admin-section-categories" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Категории</h2>
+                                <button class="btn primary" id="add-category-row">+ Добавить категорию</button>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Описание</th>
+                                            <th>Slug</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="categories-table-body">
+                                        <tr>
+                                            <td colspan="6" class="no-data">Загрузка категорий...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="categories-pagination"></div>
+                        </div>
+                        
+                        <!-- Производители -->
+                        <div id="admin-section-manufacturers" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Производители</h2>
+                                <button class="btn primary" id="add-manufacturer-row">+ Добавить производителя</button>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Страна</th>
+                                            <th>Сайт</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="manufacturers-table-body">
+                                        <tr>
+                                            <td colspan="5" class="no-data">Загрузка производителей...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="manufacturers-pagination"></div>
+                        </div>
+                        
+                        <!-- Способы доставки -->
+                        <div id="admin-section-delivery-methods" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Способы доставки</h2>
+                                <button class="btn primary" id="add-delivery-method-row">+ Добавить способ доставки</button>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Описание</th>
+                                            <th>Базовая стоимость</th>
+                                            <th>Порог бесплатной доставки</th>
+                                            <th>Срок доставки (дни)</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="delivery-methods-table-body">
+                                        <tr>
+                                            <td colspan="7" class="no-data">Загрузка способов доставки...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="delivery-methods-pagination"></div>
+                        </div>
+                        
+                        <!-- Способы оплаты -->
+                        <div id="admin-section-payment-methods" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Способы оплаты</h2>
+                                <button class="btn primary" id="add-payment-method-row">+ Добавить способ оплаты</button>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Описание</th>
+                                            <th>Работает ли?</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="payment-methods-table-body">
+                                        <tr>
+                                            <td colspan="4" class="no-data">Загрузка способов оплаты...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="payment-methods-pagination"></div>
+                        </div>
+                        
+                        <!-- Вакансии -->
+                        <div id="admin-section-vacancies" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Вакансии</h2>
+                                <button class="btn primary" id="add-vacancy-row">+ Добавить вакансию</button>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Дата создания</th>
+                                            <th>Статус</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="vacancies-table-body">
+                                        <tr>
+                                            <td colspan="5" class="no-data">Загрузка вакансий...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="vacancies-pagination"></div>
+                        </div>
+                        
+                        <!-- Характеристики -->
+                        <div id="admin-section-characteristics" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Характеристики</h2>
+                                <button class="btn primary" id="add-characteristic-row">+ Добавить характеристику</button>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Название</th>
+                                            <th>Единица измерения</th>
+                                            <th>Категория</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="characteristics-table-body">
+                                        <tr>
+                                            <td colspan="5" class="no-data">Загрузка характеристик...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="characteristics-pagination"></div>
+                        </div>
+                        
+                        <!-- Заказы -->
+                        <div id="admin-section-orders" class="admin-section-content">
+                            <div class="section-header">
+                                <h2 class="section_title">Заказы</h2>
+                            </div>
+                            <div class="admin-filters">
+                                <div class="filter-group">
+                                    <label for="order-status">Статус:</label>
+                                    <select id="order-status" class="form-select">
+                                        <option value="all">Все</option>
+                                        <option value="created">Создан</option>
+                                        <option value="processing">В обработке</option>
+                                        <option value="shipped">Отправлен</option>
+                                        <option value="delivered">Доставлен</option>
+                                        <option value="cancelled">Отменен</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label for="order-date">Дата:</label>
+                                    <input type="date" id="order-date" class="form-input">
+                                </div>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Пользователь</th>
+                                            <th>Сумма</th>
+                                            <th>Статус</th>
+                                            <th>Дата создания</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="orders-table-body">
+                                        <tr>
+                                            <td colspan="6" class="no-data">Загрузка заказов...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="pagination" id="orders-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/common.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
