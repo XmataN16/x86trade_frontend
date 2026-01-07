@@ -1,5 +1,5 @@
 // js/api.js
-const API_BASE = "http://localhost:8080"; // поменяй если бэк на другом хосте/порту
+const API_BASE = "https://x86trade-backend.onrender.com"; // поменяй если бэк на другом хосте/порту
 
 // Получить токены из localStorage
 function getAccessToken() {
